@@ -25,17 +25,10 @@ public class City {
     @GeneratedValue
     private Long id;
 
-    @NonNull
-    private String city;
-
-    @NonNull
-    private String country;
-
-    @NonNull
-    private Double latitude;
-    
-    @NonNull
-    private Double longitude;
+    @NonNull private String city;
+    @NonNull private String country;
+    @NonNull private Double latitude;
+    @NonNull private Double longitude;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<Destination> destinations;

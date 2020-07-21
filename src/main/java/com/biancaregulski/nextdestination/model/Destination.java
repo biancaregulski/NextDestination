@@ -17,14 +17,9 @@ public class Destination {
     @GeneratedValue
     private Long id;
 
-    @NonNull
-    private String name;
-
-    @NonNull
-    private Double latitude;
-    
-    @NonNull
-    private Double longitude;
+    @NonNull private String name;
+    @NonNull private Double latitude;
+    @NonNull private Double longitude;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private City city;

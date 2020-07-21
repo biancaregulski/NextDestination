@@ -12,7 +12,11 @@ class CityBox extends Component {
             <div className="col-md-3 col-sm-6">
                 <div className="card mt-4">
                     <div className="card-body ">
-                        <h5 className="card-title text-center">{this.props.city.city}, {this.props.city.country}</h5>
+                        <Link to={{ 
+                                pathname: "/cities/" + this.props.city.id,
+                            }}>
+                            <h5 className="card-title text-center">{this.props.city.city}, {this.props.city.country}</h5>
+                        </Link>
                         <img className="city-img"
                             src="https://www.langan.com/wp-content/uploads/2019/02/Boston-996x554.jpg"
                             alt="new"
@@ -20,9 +24,7 @@ class CityBox extends Component {
                         <em>Destinations:</em>
                         {destinationsGroup}
                         <div className="center-content">
-                            <p>
-                                <a class="btn btn-primary btn-lg" href="/destinations/new">Add</a>
-                            </p>
+                            <p><a class="btn btn-primary" href= {"/destinations/new/" + this.props.city.id}>Add</a></p>
                         </div>
                     </div>
                 </div>

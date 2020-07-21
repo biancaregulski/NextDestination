@@ -69,3 +69,20 @@
 .main-container {
   max-width: 1140px;
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #625eea !important;
+  border-color: #625eea !important;
+}
+
+.list-item {
+  border-top: 2px solid darkgray;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.destination-list {
+  clear: both;
+  margin-top: 10px;
+}
