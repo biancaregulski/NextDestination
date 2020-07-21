@@ -34,7 +34,6 @@ class CityBoxGroup extends Component {
         return (
             <div>
                 <Container fluid>
-                    <h3>Cities</h3>
                     <div className="row d-flex flex-wrap mb-4">
                         {cityBoxGroup}
                     </div>

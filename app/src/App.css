@@ -45,6 +45,12 @@
 .container, .container-fluid {
   margin-top: 20px;
 }
+
+.search {
+  display: inline;
+  margin-right: 10px;
+}
+
 *,
 *::before,
 *::after {
@@ -58,4 +64,8 @@
 .center-content {
   display: flex;
   justify-content: center;
+}
+
+.main-container {
+  max-width: 1140px;
 }

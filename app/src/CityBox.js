@@ -20,7 +20,9 @@ class CityBox extends Component {
                         <em>Destinations:</em>
                         {destinationsGroup}
                         <div className="center-content">
-                            <Button color="success" tag={Link} to="/destinations/new">Add</Button>
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="/destinations/new">Add</a>
+                            </p>
                         </div>
                     </div>
                 </div>
