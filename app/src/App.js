@@ -14,6 +14,7 @@ class App extends Component {
           <Route path='/' exact={true} component={Home}/>
           <Route path='/cities' exact={true} component={CityBoxGroup}/>
           <Route path='/cities/:id' component={CityDisplay}/>
+          <Route path='/cities/:id/destination/:destId' component={CityDisplay}/>
           <Route path='/destinations/new' component={DestinationAdd}/>
           <Route path='/destinations/new/:id' component={DestinationAdd}/>
         </Switch>

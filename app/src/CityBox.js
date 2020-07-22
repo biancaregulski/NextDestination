@@ -6,7 +6,8 @@ import './App.css';
 class CityBox extends Component {
     render() {
         const destinationsGroup = this.props.city.destinations.map(destination => {
-            return <p><a href="google.com" target="_blank">{destination.name}</a></p>
+            return <p><a href={ "cities/" + this.props.city.id + "/destination/" + destination.id} 
+                target="_blank">{destination.name}</a></p>
         });
         return (
             <div className="col-md-3 col-sm-6">

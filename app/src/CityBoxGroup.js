@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
 import CityBox from "./CityBox";
+import ReactSearchBox from 'react-search-box'
 
 class CityBoxGroup extends Component {
     constructor(props) {
@@ -18,6 +19,10 @@ class CityBoxGroup extends Component {
           .then(response => response.json())
           .then(data => this.setState({cities: data, isLoading: false}));
     }
+    
+    handleSearch(cityId) {
+        window.location.assign("cities/" + cityId);
+    }
 
     render() {
         const {cities, isLoading} = this.state;
@@ -26,21 +31,26 @@ class CityBoxGroup extends Component {
             return <p>Loading...</p>;
         }
 
-        const cityBoxGroup = cities.map(city => {
+        var citiesSearch = [];
+
+        var cityBoxGroup = cities.map(city => {
+            citiesSearch.push({
+                key: city.id,
+                value: city.city + ", " + city.country
+            });
             return <CityBox city={city} />
         });
+
         return (
             <div>
-                <form action="/cities" method="GET"/>
-                <div className="form-group search">
-                    <input type="text" name="search" className="search" placeholder="Search by city"/>
-                    <button type="submit" className="btn btn-secondary">Search</button>
-                </div>
-                <form action="/cities" className="search" method="GET"/>
-                <div className="form-group search">
-                    <input type="text" name="search" className="search" placeholder="Search by destination"/>
-                    <button type="submit" className="btn btn-secondary">Search</button>
-                </div>
+                <ReactSearchBox
+                    placeholder="Search cities"
+                    data={citiesSearch}
+                    onSelect={record => this.handleSearch(record.key)}
+                    fuseConfigs={{
+                        threshold: 0.2,
+                    }} 
+                />
                 <Container fluid>
                     <div className="row d-flex flex-wrap mb-4">
                         {cityBoxGroup}
