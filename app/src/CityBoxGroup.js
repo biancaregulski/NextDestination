@@ -23,9 +23,19 @@ class CityBoxGroup extends Component {
     
         fetch('api/cities')
           .then(response => response.json())
-          .then(data => this.setState({cities: data, isLoading: false}));
+          .then(data => this.setCity(data));      
     }
     
+    setCity(data) {
+        this.setState({cities: data, isLoading: false});
+        data.map(city => {
+            this.state.citiesSearch.push({
+                key: city.id,
+                value: city.city + ", " + city.country
+            });
+        })
+    }
+
     handleSearch(cityId) {
         window.location.assign("cities/" + cityId);
     }
@@ -38,13 +48,8 @@ class CityBoxGroup extends Component {
     }
 
     getBoxes() {
-        console.log(this.state.offset);
-        const slice = (this.state.cities).slice(this.state.offset, this.state.offset + this.state.boxesPerPage)
+        const slice = (this.state.cities).slice(this.state.offset, this.state.offset + this.state.boxesPerPage);
         return (slice.map(city => {
-            this.state.citiesSearch.push({
-                key: city.id,
-                value: city.city + ", " + city.country
-            });
             return <CityBox city={city} />
         }));
     }

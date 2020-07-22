@@ -11,19 +11,21 @@ class CityBox extends Component {
         return (
             <div className="city-box-col card">
                     <div className="city-box">
-                        <Link to={{ 
-                                pathname: "/cities/" + this.props.city.id,
-                            }}>
-                            <h5 className="card-title text-center">{this.props.city.city}, {this.props.city.country}</h5>
-                        </Link>
-                        <img className="city-img"
-                            src="https://www.langan.com/wp-content/uploads/2019/02/Boston-996x554.jpg"
-                            alt="new"
-                        />
-                        <em>Destinations:</em>
-                        {destinationsGroup}
-                        <div className="center-content">
-                            <p><a class="btn btn-primary" href= {"/destinations/new/" + this.props.city.id}>Add</a></p>
+                        <div className="city-box-info">
+                            <Link to={{ 
+                                    pathname: "/cities/" + this.props.city.id,
+                                }}>
+                                <h5 className="card-title text-center">{this.props.city.city}, {this.props.city.country}</h5>
+                            </Link>
+                            <img className="city-img"
+                                src="https://www.langan.com/wp-content/uploads/2019/02/Boston-996x554.jpg"
+                                alt="new"
+                            />
+                            <em>Destinations:</em>
+                            {destinationsGroup}
+                        </div>
+                        <div className="center-content city-box-bottom">
+                            <p className="city-box-btn"><a className="btn btn-primary" href= {"/destinations/new/" + this.props.city.id}>Add</a></p>
                         </div>
                     </div>
             </div>

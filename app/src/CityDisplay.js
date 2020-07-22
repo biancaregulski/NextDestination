@@ -68,19 +68,17 @@ class CityDisplay extends Component {
 
     return (
       <div>
-        <Container className="main-container" fluid>
-          <div>
-            <Container fluid>
-              <div className="float-right">
-                <p><a class="btn btn-primary" href="/destinations/new">Add Destination</a></p>
-              </div>
-              <h2>{city}, {country}</h2>
-              <div className="destination-list card">
-                {destinationList}
-              </div>
-            </Container>
-          </div>
-        </Container>
+        <div>
+          <Container fluid>
+            <div className="float-right">
+              <p><a class="btn btn-primary" href="/destinations/new">Add Destination</a></p>
+            </div>
+            <h2>{city}, {country}</h2>
+            <div className="destination-list card">
+              {destinationList}
+            </div>
+          </Container>
+        </div>
       </div>
     );
   }

@@ -45,7 +45,6 @@ class DestinationAdd extends Component {
         const {item} = this.state;
         const title = <h2>Add Destination</h2>;
         return <div>
-          <AppNavbar/>
           <Container>
             {title}
             <form action="/cities" method="GET"/>
