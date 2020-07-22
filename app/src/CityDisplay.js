@@ -54,7 +54,7 @@ class CityDisplay extends Component {
     const destinationList = destinations.map(destination => {
 
       return( 
-        <div className='list-item'>
+        <div className="list-item right-left">
           <div>
             <a href=""><h5>{destination.name}</h5></a>    { /* select destination on map*/ }
             <p>Address 1</p>
@@ -68,7 +68,6 @@ class CityDisplay extends Component {
 
     return (
       <div>
-        <AppNavbar/>
         <Container className="main-container" fluid>
           <div>
             <Container fluid>
@@ -76,7 +75,7 @@ class CityDisplay extends Component {
                 <p><a class="btn btn-primary" href="/destinations/new">Add Destination</a></p>
               </div>
               <h2>{city}, {country}</h2>
-              <div className="destination-list">
+              <div className="destination-list card">
                 {destinationList}
               </div>
             </Container>
