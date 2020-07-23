@@ -1,3 +1,6 @@
+// mvnw spring-boot:run
+// yarn start
+
 import React, { Component } from 'react';
 import './App.css';
 import Home from './Home';

@@ -90,7 +90,7 @@
 
 
 .list-item {
-  border-top: 1px solid rgb(0, 0, 0, 15%);
+  border-top: 1px solid rgba(0, 0, 0, .125);
   padding: 1.5rem;
 }
 
@@ -122,7 +122,6 @@
 .city-box-row {
   margin: 20px 0;
   display: flex;
-  justify-content: space-between;
   column-gap: 20px;
 }
 
@@ -146,6 +145,22 @@ footer {
   background-color: #e9ecef;
   padding: 1em;
   align-items: center;
+}
+
+.inputContainer {
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 4px;
+  display: flex;
+  width: 30%;
+}
+
+/* put in autosuggesttheme file */
+.icon {
+  position: relative;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
 }
 
 footer > p {
