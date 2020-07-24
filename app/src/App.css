@@ -79,9 +79,16 @@
   margin: 2rem 0;
 }
 
+/* override button colors */
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
   background-color: #625eea !important;
   border-color: #625eea !important;
+}
+
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+  background-color: #e9ecef !important;
+  border-color: #e9ecef !important;
+  color: black !important;
 }
 
 .list-item {
@@ -89,9 +96,13 @@
   padding: 1.5rem;
 }
 
-.right-left {
+.left-right {
   display: flex;
   justify-content: space-between;
+}
+
+.clear {
+  clear: both;
 }
 
 .list-item:first-child { 
@@ -99,8 +110,8 @@
 }
 
 .destination-list {
-  clear: both;
-  margin-top: 10px;
+  flex-grow: 1;
+  margin-right: 10px;
 }
 
 .search-container .search-button button{
@@ -160,6 +171,32 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mapContainer {
+  width: 24vw;
+  height: 30vw;
+}
+
+.circle {
+  background: #625eea;
+  border-radius: 50%;
+  color: #fff;
+  height: 2.5em;
+  position: relative;
+  width: 2.5em;
+
+  border: 1px solid transparent;
+}
+
+.circleText {
+  text-align: center;
+  height: 50%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
 }
 
 footer > p {

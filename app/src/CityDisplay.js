@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container } from 'reactstrap';
-import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
+import MapContainer from "./MapContainer"
 
 class CityDisplay extends Component {
 
@@ -9,8 +9,6 @@ class CityDisplay extends Component {
     super(props);
     this.state = { 
       city: null,
-      country: null,
-      destinations: null,
       isLoading: true
     };
     this.id = props.match.params.id;
@@ -23,9 +21,7 @@ class CityDisplay extends Component {
     fetch('/api/cities')
       .then(response => response.json())
       .then(data => this.setState({
-        city: data[this.id - 1].city,
-        country: data[this.id - 1].country,
-        destinations: data[this.id - 1].destinations, 
+        city: data[this.id - 1],
         isLoading: false
       }));
   }
@@ -44,17 +40,17 @@ class CityDisplay extends Component {
   }
 
   render() {
-    const {city, country, destinations, isLoading} = this.state;
+    const {city, isLoading} = this.state;
 
     if (isLoading) {
       return <p>Loading...</p>;
     }
 
     let counter = 0;
-    const destinationList = destinations.map(destination => {
+    const destinationList = city.destinations.map(destination => {
 
       return( 
-        <div className="list-item right-left">
+        <div className="list-item left-right" >
           <div>
             <a href=""><h5>{destination.name}</h5></a>    { /* select destination on map*/ }
             <p>Address 1</p>
@@ -67,18 +63,22 @@ class CityDisplay extends Component {
     )});
 
     return (
+      // change to grid display
       <div>
-        <div>
-          <Container fluid>
-            <div className="float-right">
-              <p><a class="btn btn-primary" href="/destinations/new">Add Destination</a></p>
-            </div>
-            <h2>{city}, {country}</h2>
-            <div className="destination-list card">
+        <Container fluid>
+          <div className="float-right">
+            <p><a class="btn btn-primary" href="/destinations/new">Add Destination</a></p>
+          </div>
+          <h2>{city.city}, {city.country}</h2>
+          <div className="left-right clear">
+            <div className="destination-list clear card">
               {destinationList}
             </div>
-          </Container>
-        </div>
+            <div>
+              <MapContainer city={city}/>
+            </div>
+          </div>
+        </Container>
       </div>
     );
   }

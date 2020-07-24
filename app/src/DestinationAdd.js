@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import AppNavbar from './AppNavbar';
+import Map from "./MapContainer";
 
 
 class DestinationAdd extends Component {
@@ -44,23 +44,25 @@ class DestinationAdd extends Component {
     render() {
         const {item} = this.state;
         const title = <h2>Add Destination</h2>;
-        return <div>
-          <Container>
-            {title}
-            <form action="/cities" method="GET"/>
-            <div className="form-group search">
-                <input type="text" name="search" className="search" placeholder="Search city"/>
-                <button type="submit" className="btn btn-primary">Search</button>
-            </div>
-            <Form onSubmit={this.handleSubmit}>
-                { /* google maps api*/ }
-              <FormGroup>
-                <Button color="secondary" tag={Link} to="/">Cancel</Button>
-                <Button color="primary" type="submit">Save</Button>
-              </FormGroup>
-            </Form>
-          </Container>
-        </div>
+        return (
+          <div>
+            <Container>
+              {title}
+              <form action="/cities" method="GET"/>
+              <div className="form-group search">
+                  <input type="text" name="search" className="search" placeholder="Search city"/>
+                  <button type="submit" className="btn btn-primary">Search</button>
+              </div>
+              <Form onSubmit={this.handleSubmit}>
+                <Map />
+                <FormGroup>
+                  <Button color="secondary" tag={Link} to="/">Cancel</Button>
+                  <Button color="primary" type="submit">Save</Button>
+                </FormGroup>
+              </Form>
+            </Container>
+          </div>
+        )
     }
 }
     

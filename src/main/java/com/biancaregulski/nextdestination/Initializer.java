@@ -19,7 +19,7 @@ public class Initializer implements CommandLineRunner {
     @Override
     public void run(String... strings) {
         Stream.of("Boston", "Seattle", "Austin", "Savannah", "New York City")
-            .forEach(city -> repository.save(new City(city, "United States", 1.0, 1.0)));
+            .forEach(city -> repository.save(new City(city, "United States", 42.3601, -71.0589)));
         City bostonCity = repository.findByCity("Boston");
         Destination freedomDest = new Destination ("Freedom Trail", 42.3601, -71.0589);
         Destination museumDest = new Destination ("Museum of Fine Arts", 42.3394, -71.0940);
