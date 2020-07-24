@@ -54,10 +54,6 @@
   padding-right: 0px !important;
 }
 
-#navbar {
-
-}
-
 .search {
   display: inline;
   margin-right: 10px;
@@ -87,7 +83,6 @@
   background-color: #625eea !important;
   border-color: #625eea !important;
 }
-
 
 .list-item {
   border-top: 1px solid rgba(0, 0, 0, .125);
@@ -151,16 +146,20 @@ footer {
   border: 1px solid rgba(0, 0, 0, .125);
   border-radius: 4px;
   display: flex;
-  width: 30%;
+  width: 300px;
 }
 
 /* put in autosuggesttheme file */
 .icon {
   position: relative;
-  top: 10px;
-  right: 10px;
+  left: 10px;
   width: 24px;
-  height: 24px;
+  opacity: 0.5;
+  cursor: pointer;
+  /* vertical center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer > p {

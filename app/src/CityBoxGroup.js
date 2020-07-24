@@ -68,7 +68,7 @@ class CityBoxGroup extends Component {
     }
 
     handleChangeResults = idSet => { 
-        if(idSet.size == 0) {
+        if(idSet.size === 0) {
             this.state.citiesResults = this.state.cities;
         }
         else {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
-import autosuggestTheme from "./AutosuggestTheme.module.scss";
+import autosuggestTheme from "./SearchBox.module.scss";
+import {Redirect} from 'react-router-dom';
 
 function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -26,25 +27,16 @@ function renderSuggestion(suggestion) {
     );
 };
 
-// TODO: fix icon padding and make it clickable
-const renderInputComponent = inputProps => (
-    <div className="inputContainer">
-      <input {...inputProps} />
-      <i class=" icon fa fa-search"></i>
-    </div>
-  );
-
-// TODO: render suggestions when input is blank
-// TODO: enter on highlighted suggestion goes to /cities/{id}
-
 class SearchBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
             suggestions: [],
-            value: ""
+            value: "",
+            toCityDisplay: false
         };
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
     }
 
     getSuggestions(value) {
@@ -58,8 +50,20 @@ class SearchBox extends Component {
         return this.props.cityValues.filter(cityValue => regex.test(removePunct(cityValue.value)));
     }
 
+    onSuggestionSelected(event, { suggestion }) {
+        this.handleSearchSelect(suggestion.data);
+    }
+
     handleSearchSelect(cityId) {
-        window.location.assign("cities/" + cityId);
+        //window.location.assign("cities/" + cityId);
+        //let history = useHistory();
+        //this.props.history.push("cities/" + cityId);
+        //browserHistory.push('/some/path');
+
+        this.setState({
+            toCityDisplay: true,
+            cityId: cityId
+        });
     }
 
     handleSearchChange = (event, { newValue, method }) => {
@@ -70,14 +74,25 @@ class SearchBox extends Component {
 
     onKeyDown(event) {
         if (event.key === "Enter") {
-            // return set of IDs to display results
-            var idSet = new Set();
-            this.state.suggestions.forEach(result => {
-                idSet.add(result.data)
-            });
-
-            this.props.handleChangeResults(idSet);
+            this.returnResults();
         }
+    }
+
+    renderInputComponent = inputProps => (
+        <div className="inputContainer">
+            <span onClick={this.returnResults} className="icon fa fa-search"></span>
+            <input {...inputProps} />
+        </div>
+    );
+
+    returnResults() {
+        // return set of IDs to display results
+        var idSet = new Set();
+        this.state.suggestions.forEach(result => {
+            idSet.add(result.data)
+        });
+
+        this.props.handleChangeResults(idSet);
     }
     
     onSuggestionsFetchRequested = ({ value }) => {
@@ -94,6 +109,11 @@ class SearchBox extends Component {
     };
 
     render() {
+        // on suggestion click or enter, go to its cities/{id} page
+        if (this.state.toCityDisplay) {
+            return <Redirect to={ "cities/" + this.state.cityId }/>
+        }
+        
         const value = this.state.value;
 
         const inputProps = {
@@ -113,7 +133,8 @@ class SearchBox extends Component {
                     shouldRenderSuggestions={shouldRenderSuggestions}
                     renderSuggestion={renderSuggestion}
                     inputProps={inputProps}
-                    renderInputComponent={renderInputComponent}
+                    renderInputComponent={this.renderInputComponent}
+                    onSuggestionSelected={this.onSuggestionSelected}
                 />
             </div>
         );

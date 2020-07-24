@@ -11,6 +11,7 @@ import DestinationAdd from './DestinationAdd';
 import AppNavbar from './AppNavbar';
 import Footer from './Footer';
 import { Container } from 'reactstrap';
+import SearchBox from './SearchBox';
 
 class App extends Component {
   render() {
