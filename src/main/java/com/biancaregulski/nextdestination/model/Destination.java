@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 public class Destination {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @NonNull private String name;

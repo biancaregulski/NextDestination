@@ -75,8 +75,9 @@
 }
 
 .main-container {
-  max-width: 1000px;
-  margin: 2rem 0;
+  width: 1000px;
+  margin: 2rem auto;
+  padding: 0 10px;
 }
 
 /* override button colors */
@@ -93,7 +94,7 @@
 
 .list-item {
   border-top: 1px solid rgba(0, 0, 0, .125);
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
 }
 
 .left-right {
@@ -105,13 +106,18 @@
   clear: both;
 }
 
-.list-item:first-child { 
-  border-top: none; 
-}
-
 .destination-list {
   flex-grow: 1;
   margin-right: 10px;
+}
+
+.list-item:first-child { 
+  border-top: none; 
+}
+.selected-destination {
+  background-color: #e9ecef;
+  border: 2px solid #625eea !important;
+  border-radius: 2px;
 }
 
 .search-container .search-button button{
@@ -147,6 +153,11 @@
   justify-content: space-between;
 }
 
+.city-info {
+  flex-grow: 1;
+  padding: 0 1rem;
+}
+
 footer {
   background-color: #e9ecef;
   padding: 1em;
@@ -173,30 +184,10 @@ footer {
   align-items: center;
 }
 
+/* put above when thin enough */
 .mapContainer {
   width: 24vw;
-  height: 30vw;
-}
-
-.circle {
-  background: #625eea;
-  border-radius: 50%;
-  color: #fff;
-  height: 2.5em;
-  position: relative;
-  width: 2.5em;
-
-  border: 1px solid transparent;
-}
-
-.circleText {
-  text-align: center;
-  height: 50%;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
+  height: 360px;
 }
 
 footer > p {

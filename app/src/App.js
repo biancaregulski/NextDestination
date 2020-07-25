@@ -1,5 +1,7 @@
-// mvnw spring-boot:run
-// yarn start
+/* mvnw spring-boot:run
+ * mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+ * yarn start
+ * yarn run start */
 
 import React, { Component } from 'react';
 import './App.css';
@@ -11,7 +13,6 @@ import DestinationAdd from './DestinationAdd';
 import AppNavbar from './AppNavbar';
 import Footer from './Footer';
 import { Container } from 'reactstrap';
-import SearchBox from './SearchBox';
 
 class App extends Component {
   render() {
@@ -19,16 +20,16 @@ class App extends Component {
       <Router>
         <div id="page-container">
           <AppNavbar/>
-          <Container className="main-container" fluid>
+          <div className="main-container">
             <Switch>
               <Route path='/' exact={true} component={Home}/>
               <Route path='/cities' exact={true} component={CityBoxGroup}/>
-              <Route path='/cities/:id' component={CityDisplay}/>
-              <Route path='/cities/:id/destination/:destId' component={CityDisplay}/>
+              <Route path='/cities/:cityId' component={CityDisplay}/>
+              <Route path='/cities/:cityId/destination/:destId' component={CityDisplay}/>
               <Route path='/destinations/new' component={DestinationAdd}/>
               <Route path='/destinations/new/:id' component={DestinationAdd}/>
             </Switch>
-          </Container>
+          </div>
           <Footer />
         </div>
       </Router>

@@ -1,5 +1,7 @@
-// mvnw spring-boot:run
-// yarn start
+/* mvnw spring-boot:run
+ * mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+ * yarn start
+ * yarn run start */
 
 package com.biancaregulski.nextdestination;
 

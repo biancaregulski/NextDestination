@@ -55,11 +55,6 @@ class SearchBox extends Component {
     }
 
     handleSearchSelect(cityId) {
-        //window.location.assign("cities/" + cityId);
-        //let history = useHistory();
-        //this.props.history.push("cities/" + cityId);
-        //browserHistory.push('/some/path');
-
         this.setState({
             toCityDisplay: true,
             cityId: cityId

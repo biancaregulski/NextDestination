@@ -7,38 +7,49 @@ class CityDisplay extends Component {
 
   constructor(props) {
     super(props);
+
+    this.cityId = props.match.params.cityId;
+    this.destId = props.match.params.destId;
+
     this.state = { 
       city: null,
-      isLoading: true
+      isLoading: true,
+      selectedIndex: this.destId
     };
-    this.id = props.match.params.id;
     this.remove = this.remove.bind(this);
   }
 
   componentDidMount() {
-    this.setState({isLoading: true});
+    this.setState({
+      isLoading: true
+    });
 
     fetch('/api/cities')
       .then(response => response.json())
       .then(data => this.setState({
-        city: data[this.id - 1],
+        city: data[this.cityId - 1],
         isLoading: false
       }));
   }
 
   async remove() {
-    /*await fetch(`/api/cities/${id}`, {
+    /*await fetch(`/api/cities/${cityId}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     }).then(() => {
-      let updatedGroups = [...this.state.groups].filter(i => i.id !== id);
+      let updatedGroups = [...this.state.groups].filter(i => i.cityId !== cityId);
       this.setState({groups: updatedGroups});
     });*/
   }
 
+  handleDestinationSelect = num => {
+    this.setState ({ 
+      selectedIndex: num
+    });
+  }
   render() {
     const {city, isLoading} = this.state;
 
@@ -47,12 +58,16 @@ class CityDisplay extends Component {
     }
 
     let counter = 0;
-    const destinationList = city.destinations.map(destination => {
 
-      return( 
-        <div className="list-item left-right" >
-          <div>
-            <a href=""><h5>{destination.name}</h5></a>    { /* select destination on map*/ }
+    console.log(this.state.selectedIndex);
+    console.log(this.props);
+    
+    const destinationList = city.destinations.map((destination, index) => {
+      let indexNum = index + 1;
+      return (
+        <div onClick={e => this.handleDestinationSelect(indexNum)} className={"list-item left-right" + (indexNum == this.state.selectedIndex ? " selected-destination" : "")} >
+          <div className="city-info">
+            <a href="#"><h5>{indexNum}. {destination.name}</h5></a>    { /* select destination on map*/ }
             <p>Address 1</p>
             <p>Address 2</p>
           </div>
@@ -67,7 +82,7 @@ class CityDisplay extends Component {
       <div>
         <Container fluid>
           <div className="float-right">
-            <p><a class="btn btn-primary" href="/destinations/new">Add Destination</a></p>
+            <p><a className="btn btn-primary" href="/destinations/new">Add Destination</a></p>
           </div>
           <h2>{city.city}, {city.country}</h2>
           <div className="left-right clear">
@@ -75,7 +90,10 @@ class CityDisplay extends Component {
               {destinationList}
             </div>
             <div>
-              <MapContainer city={city}/>
+              <MapContainer 
+                city={city}
+                handleDestinationSelect = {this.handleDestinationSelect}
+              />
             </div>
           </div>
         </Container>
