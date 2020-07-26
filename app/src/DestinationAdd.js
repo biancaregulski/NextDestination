@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import Map from "./MapContainer";
-
+import { Button, Container, Form, FormGroup } from "reactstrap";
+import SearchBoxPlaces from "./SearchBoxPlaces"
 
 class DestinationAdd extends Component {
     emptyItem = {
@@ -41,11 +40,13 @@ class DestinationAdd extends Component {
         });
         this.props.history.push("/destinations");
     }
+    
     render() {
         const {item} = this.state;
         const title = <h2>Add Destination</h2>;
         return (
           <div>
+            <SearchBoxPlaces></SearchBoxPlaces>
             <Container>
               {title}
               <form action="/cities" method="GET"/>
@@ -54,7 +55,6 @@ class DestinationAdd extends Component {
                   <button type="submit" className="btn btn-primary">Search</button>
               </div>
               <Form onSubmit={this.handleSubmit}>
-                <Map />
                 <FormGroup>
                   <Button color="secondary" tag={Link} to="/">Cancel</Button>
                   <Button color="primary" type="submit">Save</Button>

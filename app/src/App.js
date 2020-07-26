@@ -12,7 +12,6 @@ import CityDisplay from './CityDisplay';
 import DestinationAdd from './DestinationAdd';
 import AppNavbar from './AppNavbar';
 import Footer from './Footer';
-import { Container } from 'reactstrap';
 
 class App extends Component {
   render() {
@@ -25,7 +24,6 @@ class App extends Component {
               <Route path='/' exact={true} component={Home}/>
               <Route path='/cities' exact={true} component={CityBoxGroup}/>
               <Route path='/cities/:cityId' component={CityDisplay}/>
-              <Route path='/cities/:cityId/destination/:destId' component={CityDisplay}/>
               <Route path='/destinations/new' component={DestinationAdd}/>
               <Route path='/destinations/new/:id' component={DestinationAdd}/>
             </Switch>

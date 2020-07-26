@@ -109,6 +109,8 @@
 .destination-list {
   flex-grow: 1;
   margin-right: 10px;
+  display: grid;
+  overflow-y: auto;
 }
 
 .list-item:first-child { 
@@ -144,8 +146,6 @@
 }
 
 .city-box {
-  padding: 1.25rem .5rem;
-  margin: 0 10px;
   flex: 1;        /* makes contents same size as parent div (.city-box-col) */
   min-height: 150px; /* Change this to what you need. */
   display: flex;
@@ -153,9 +153,8 @@
   justify-content: space-between;
 }
 
-.city-info {
-  flex-grow: 1;
-  padding: 0 1rem;
+.city-box-info {
+  padding: 10px 10px;
 }
 
 footer {
@@ -188,6 +187,46 @@ footer {
 .mapContainer {
   width: 24vw;
   height: 360px;
+}
+
+.location-search-input {
+  display: flex;
+  flex-grow: 1;
+  height: 30px;
+  padding: 20px 20px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+}
+
+.autocomplete-dropdown-container {
+  display: block;
+  position: absolute;
+  width: 300px;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-top: none;
+  border-radius: 4px;
+  background-color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.suggestion-item {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.suggestion-item--active {
+  background-color: #ddd;
+  padding: 10px 20px;
 }
 
 footer > p {

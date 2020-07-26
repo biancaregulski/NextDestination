@@ -67,10 +67,11 @@ class CityBoxGroup extends Component {
         });
     }
 
-    handleChangeResults = idSet => { 
+    handleChangeResults = idSet => {
         if(idSet.size === 0) {
             this.state.citiesResults = this.state.cities;
         }
+        
         else {
             this.updateResults(idSet);
         }
@@ -110,15 +111,15 @@ class CityBoxGroup extends Component {
                     </div>
                 </Container>
                 <div className="center-content">
-                <Pagination
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={this.state.boxesPerPage}
-                    totalItemsCount={this.state.citiesResults.length}
-                    pageRangeDisplayed={5}
-                    onChange={this.handlePageChange.bind(this)}
-                    itemClass="page-item"
-                    linkClass="page-link"
-                />
+                    <Pagination
+                        activePage={this.state.activePage}
+                        itemsCountPerPage={this.state.boxesPerPage}
+                        totalItemsCount={this.state.citiesResults.length}
+                        pageRangeDisplayed={5}
+                        onChange={this.handlePageChange.bind(this)}
+                        itemClass="page-item"
+                        linkClass="page-link"
+                    />
                 </div>
             </div>
         );

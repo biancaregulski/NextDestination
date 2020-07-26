@@ -14,7 +14,7 @@ class CityDisplay extends Component {
     this.state = { 
       city: null,
       isLoading: true,
-      selectedIndex: this.destId
+      selectedIndex: 5
     };
     this.remove = this.remove.bind(this);
   }
@@ -78,7 +78,6 @@ class CityDisplay extends Component {
     )});
 
     return (
-      // change to grid display
       <div>
         <Container fluid>
           <div className="float-right">
