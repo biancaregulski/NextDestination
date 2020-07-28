@@ -50,17 +50,13 @@ class CityDisplay extends Component {
       selectedIndex: num
     });
   }
+  
   render() {
     const {city, isLoading} = this.state;
 
     if (isLoading) {
       return <p>Loading...</p>;
     }
-
-    let counter = 0;
-
-    console.log(this.state.selectedIndex);
-    console.log(this.props);
     
     const destinationList = city.destinations.map((destination, index) => {
       let indexNum = index + 1;
@@ -90,7 +86,10 @@ class CityDisplay extends Component {
             </div>
             <div>
               <MapContainer 
-                city={city}
+                zoom={12}
+                lat={city.latitude}
+                lng={city.longitude}
+                destinations={city.destinations}
                 handleDestinationSelect = {this.handleDestinationSelect}
               />
             </div>

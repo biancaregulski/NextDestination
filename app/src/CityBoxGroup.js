@@ -82,7 +82,6 @@ class CityBoxGroup extends Component {
     }
 
     getBoxes() {
-        console.log(this.state.offset);
         const slice = (this.state.citiesResults).slice(this.state.offset, this.state.offset + this.state.boxesPerPage);
         return (slice.map(city => {
             return <CityBox city={city} />

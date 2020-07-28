@@ -18,9 +18,9 @@ class SearchBoxPlaces extends React.Component {
   handleSelect = address => {
     geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
-        .then(({ lat, lng }) =>
-        console.log('Successfully got latitude and longitude', address, { lat, lng })   // display map
+        .then(({ lat, lng }) => this.props.handlePlacesResults(address, lat, lng)   // display map
         );
+    
   };
 
   render() {

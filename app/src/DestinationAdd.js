@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Button, Container, Form, FormGroup } from "reactstrap";
 import SearchBoxPlaces from "./SearchBoxPlaces"
+import MapContainer from "./MapContainer"
 
 class DestinationAdd extends Component {
     emptyItem = {
@@ -14,7 +15,11 @@ class DestinationAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          item: this.emptyItem
+          item: this.emptyItem,
+          zoom: 1,
+          lat: 10,
+          lng: 10,
+          destinations: null
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -41,26 +46,36 @@ class DestinationAdd extends Component {
         this.props.history.push("/destinations");
     }
     
-    render() {
-        const {item} = this.state;
-        const title = <h2>Add Destination</h2>;
+    handleDestinationSelect = num => {
+      console.log(num);
+    }
+
+    handlePlacesResults = (address, lat, lng) => {
+      console.log(typeof(lat));
+      this.setState({
+        zoom: 12,
+        lat: lat,
+        lng: lng
+      })
+    }
+
+    render() { 
+        const {item, lat, lng, zoom, destinations} = this.state;
+        console.log(typeof(lat)); // lat/lng wont update
         return (
           <div>
-            <SearchBoxPlaces></SearchBoxPlaces>
-            <Container>
-              {title}
-              <form action="/cities" method="GET"/>
-              <div className="form-group search">
-                  <input type="text" name="search" className="search" placeholder="Search city"/>
-                  <button type="submit" className="btn btn-primary">Search</button>
-              </div>
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                  <Button color="secondary" tag={Link} to="/">Cancel</Button>
-                  <Button color="primary" type="submit">Save</Button>
-                </FormGroup>
-              </Form>
-            </Container>
+            <h2>Add Destination</h2>
+            <SearchBoxPlaces
+              handlePlacesResults = {this.handlePlacesResults}
+            />
+            <MapContainer 
+              zoom={zoom}
+              lat={lat}
+              lng={lng}
+              destinations={destinations}
+              handleDestinationSelect = {this.handleDestinationSelect}
+            />
+            <div className="image-upload-box center-text">Drag image or click here to upload</div>
           </div>
         )
     }

@@ -229,6 +229,14 @@ footer {
   padding: 10px 20px;
 }
 
+.image-upload-box {
+  width: 50%;
+  margin: 10px 0;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 4px;
+}
+
 footer > p {
   margin-bottom: 0;
 }
