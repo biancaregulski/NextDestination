@@ -20,7 +20,6 @@ class SearchBoxPlaces extends React.Component {
         .then(results => getLatLng(results[0]))
         .then(({ lat, lng }) => this.props.handlePlacesResults(address, lat, lng)   // display map
         );
-    
   };
 
   render() {
@@ -28,7 +27,7 @@ class SearchBoxPlaces extends React.Component {
         <PlacesAutocomplete
             value={this.state.address}
             onChange={this.handleChange}
-            onSelect={this.handleSelect} 
+            onSelect={this.handleSelect}
         >
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <div>

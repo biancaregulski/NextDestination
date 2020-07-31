@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { Button, Container, Form, FormGroup } from "reactstrap";
+import { withRouter } from "react-router-dom";
+import TextField from '@material-ui/core/TextField';
 import SearchBoxPlaces from "./SearchBoxPlaces"
-import MapContainer from "./MapContainer"
+
+const defaultImg = process.env.PUBLIC_URL + "/image/city.png";
 
 class DestinationAdd extends Component {
     emptyItem = {
@@ -16,10 +17,7 @@ class DestinationAdd extends Component {
         super(props);
         this.state = {
           item: this.emptyItem,
-          zoom: 1,
-          lat: 10,
-          lng: 10,
-          destinations: null
+          imgUrl: defaultImg
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -52,30 +50,59 @@ class DestinationAdd extends Component {
 
     handlePlacesResults = (address, lat, lng) => {
       console.log(typeof(lat));
-      this.setState({
-        zoom: 12,
-        lat: lat,
-        lng: lng
-      })
     }
 
+    linkState = key => {
+      return event => {
+          this.setState({
+            [key]: event.target.value 
+          });
+      };
+    };
+
+    handleSubmit() {
+      console.log(this.state.imgUrl);
+    }
+
+    addDefaultSrc(e) {
+      e.target.src = defaultImg;
+    }
+    
     render() { 
-        const {item, lat, lng, zoom, destinations} = this.state;
-        console.log(typeof(lat)); // lat/lng wont update
+        const {item} = this.state;
+        let message = "";
         return (
-          <div>
+          <div className="add-dest-container center-text">
             <h2>Add Destination</h2>
             <SearchBoxPlaces
+              className="add-dest-div"
               handlePlacesResults = {this.handlePlacesResults}
             />
-            <MapContainer 
-              zoom={zoom}
-              lat={lat}
-              lng={lng}
-              destinations={destinations}
-              handleDestinationSelect = {this.handleDestinationSelect}
+            <TextField
+              className="add-dest-div"
+              id="outlined-basic"
+              label="Image url"
+              variant="outlined"
+              value={this.state.imgUrl !== "/image/city.png" ? this.state.imgUrl : ""}
+              onChange={this.linkState('imgUrl')}
             />
-            <div className="image-upload-box center-text">Drag image or click here to upload</div>
+            { /* change onChange above to button click to update state and change img preview */ }
+            <fieldset className="image-preview ">
+              <legend>Image preview</legend>
+              <img  className="city-img" onError={this.addDefaultSrc} src={this.state.imgUrl} alt={"Image preview"}/>
+            </fieldset>
+            <TextField 
+              className="add-dest-div"
+              id="outlined-multiline-static"
+              label="Description"
+              multiline
+              rows={3}
+              variant="outlined"
+              value={this.state.description} 
+              onChange={this.linkState('description')}
+            />
+            <p className="submit-btn"><a className="btn btn-primary" href="#" onClick={this.handleSubmit}>Submit</a></p>
+            <p><a href="#">Go Back</a></p>
           </div>
         )
     }

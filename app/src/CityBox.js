@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import './App.css';
+
+const defaultImg = process.env.PUBLIC_URL + "/image/city.png";
 
 class CityBox extends Component {
     render() {
@@ -8,8 +9,8 @@ class CityBox extends Component {
             <div className="city-box-col card">
                     <div className="city-box">
                         <img className="city-img"
-                            src="https://www.langan.com/wp-content/uploads/2019/02/Boston-996x554.jpg"
-                            alt="new"
+                            src={defaultImg}
+                            alt="Default city image"
                         />
                         <div className="city-box-info text-center">
                             <h5>{this.props.city.city}</h5>
