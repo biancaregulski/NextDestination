@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import TextField from '@material-ui/core/TextField';
+import { Button } from 'reactstrap';
 import SearchBoxPlaces from "./SearchBoxPlaces"
 
 const defaultImg = process.env.PUBLIC_URL + "/image/city.png";
@@ -15,25 +15,23 @@ class DestinationAdd extends Component {
 
     constructor(props) {
         super(props);
+
+        this.imgUrlRef = React.createRef();
+        
         this.state = {
           item: this.emptyItem,
-          imgUrl: defaultImg
+          imgUrl: defaultImg,
+          imgError: false
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    async componentDidMount() {
-        if (this.props.match.params.id !== "new") {
-            const destination = await(await fetch(`/api/destination/${this.props.match.params.id}`)).json();
-            this.setState({item: destination});
-        }
-    }
-
+    
     async handleSubmit(event) {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch("api/destination", {
+        /*await fetch("api/destination", {
             method: "POST",
             headers: {
             "Accept": "application/json",
@@ -41,7 +39,7 @@ class DestinationAdd extends Component {
             },
             body: JSON.stringify(item),
         });
-        this.props.history.push("/destinations");
+        this.props.history.push("/destinations");*/
     }
     
     handleDestinationSelect = num => {
@@ -64,13 +62,23 @@ class DestinationAdd extends Component {
       console.log(this.state.imgUrl);
     }
 
-    addDefaultSrc(e) {
+    addDefaultSrc = e => {
       e.target.src = defaultImg;
+      this.setState({
+        imgError: true
+      });
+    }
+
+    updateImage = e => {
+      e.preventDefault();
+      this.setState({
+        imgUrl: this.imgUrlRef.current.value,
+        imgError: false
+      });
     }
     
     render() { 
-        const {item} = this.state;
-        let message = "";
+        const {item, imgUrl, imgError} = this.state;
         return (
           <div className="add-dest-container center-text">
             <h2>Add Destination</h2>
@@ -78,29 +86,20 @@ class DestinationAdd extends Component {
               className="add-dest-div"
               handlePlacesResults = {this.handlePlacesResults}
             />
-            <TextField
-              className="add-dest-div"
-              id="outlined-basic"
-              label="Image url"
-              variant="outlined"
-              value={this.state.imgUrl !== "/image/city.png" ? this.state.imgUrl : ""}
-              onChange={this.linkState('imgUrl')}
-            />
-            { /* change onChange above to button click to update state and change img preview */ }
-            <fieldset className="image-preview ">
+            <div className="img-url-container left-right">
+              <form className="img-url-form" onSubmit={this.updateImage}>
+                <fieldset className={"add-dest-fieldset" + (imgError ? " fieldset-error" : "") }>
+                  <legend>Image url</legend>
+                  <input className="img-url-input" type="text" ref={this.imgUrlRef}></input>
+                </fieldset>
+                <Button className="img-url-btn" onClick={this.updateImage}>OK</Button>
+              </form>
+            </div>
+            <p className="warning-msg" style={{visibility: imgError ? "visible" : "hidden"}}>Invalid image url.</p>
+            <fieldset className="add-dest-fieldset">
               <legend>Image preview</legend>
-              <img  className="city-img" onError={this.addDefaultSrc} src={this.state.imgUrl} alt={"Image preview"}/>
+              <img  className="city-img" src={imgUrl} onLoad={() => this.setState({loaded: true})} onError={this.addDefaultSrc} alt={"Image preview"}/>
             </fieldset>
-            <TextField 
-              className="add-dest-div"
-              id="outlined-multiline-static"
-              label="Description"
-              multiline
-              rows={3}
-              variant="outlined"
-              value={this.state.description} 
-              onChange={this.linkState('description')}
-            />
             <p className="submit-btn"><a className="btn btn-primary" href="#" onClick={this.handleSubmit}>Submit</a></p>
             <p><a href="#">Go Back</a></p>
           </div>
