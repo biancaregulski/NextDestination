@@ -6,7 +6,7 @@ import SearchBoxPlaces from "./SearchBoxPlaces"
 const defaultImg = process.env.PUBLIC_URL + "/image/city.png";
 
 class DestinationAdd extends Component {
-    emptyItem = {
+    emptyDestinationItem = {
         cityId: "",
         name: "",
         longitude: "",
@@ -19,35 +19,31 @@ class DestinationAdd extends Component {
         this.imgUrlRef = React.createRef();
         
         this.state = {
-          item: this.emptyItem,
+          destinationItem: this.emptyDestinationItem,
+          address: "",
           imgUrl: defaultImg,
           imgError: false
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
-    async handleSubmit(event) {
-        event.preventDefault();
-        const {item} = this.state;
 
-        /*await fetch("api/destination", {
-            method: "POST",
-            headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-            },
-            body: JSON.stringify(item),
-        });
-        this.props.history.push("/destinations");*/
-    }
     
     handleDestinationSelect = num => {
       console.log(num);
     }
 
     handlePlacesResults = (address, lat, lng) => {
-      console.log(typeof(lat));
+      console.log(lat);
+
+      this.setState(prevState => ({
+        destinationItem: {
+          ...prevState.destinationItem,
+          name: address,
+          latitude: lat,
+          longitude: lng
+        }
+      }))
     }
 
     linkState = key => {
@@ -58,8 +54,25 @@ class DestinationAdd extends Component {
       };
     };
 
-    handleSubmit() {
+    async handleSubmit(event) {
+      event.preventDefault();
+      const {destinationItem} = this.state;
       console.log(this.state.imgUrl);
+      console.log(destinationItem.name);
+      if (destinationItem.name == "" || destinationItem.latitude == "" || destinationItem.longitude == "") {
+        alert("fail");
+      }
+      else {
+        await fetch("api/city", {
+          method: "POST",
+          headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+          },
+          body: JSON.stringify(destinationItem),
+      });
+      this.props.history.push("/destinations");
+      }
     }
 
     addDefaultSrc = e => {
@@ -78,13 +91,14 @@ class DestinationAdd extends Component {
     }
     
     render() { 
-        const {item, imgUrl, imgError} = this.state;
+        const {destinationItem, imgUrl, imgError} = this.state;
         return (
           <div className="add-dest-container center-text">
             <h2>Add Destination</h2>
             <SearchBoxPlaces
               className="add-dest-div"
               handlePlacesResults = {this.handlePlacesResults}
+              value={destinationItem.name.address}
             />
             <div className="img-url-container left-right">
               <form className="img-url-form" onSubmit={this.updateImage}>
